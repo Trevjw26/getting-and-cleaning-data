@@ -2,28 +2,61 @@
 
 Trevor Williams
 
-Repo for the submission of the course project for the Johns Hopkins Getting and Cleaning Data course.
+This repository contains the source code and documentation to complete the
+course project for the Coursera class, *Getting and Cleaning Data*.
 
-### Overview
-This project serves to demonstrate the collection and cleaning of a tidy data set that can be used for subsequent
-analysis. A full description of the data used in this project can be found at [The UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+## Expectations when sharing data
 
-[The source data for this project can be found here.](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+To facilitate efficient and timely analysis, one should pass along to a
+statistician the following:
 
-### Making Modifications to This Script
-Once you have obtained and unzipped the source files, you will need to make one modification to the R file before you can process the data.
-Note that on line 26 of run_analysis.R, you will set the path of the working directory to relect the location of the source files
-in your own directory.
+1. The raw data.
+2. A tidy dataset.
+3. A code book describing each variable and its values in the tidy dataset.
+4. A recipe for going from 1 above to 2 and 3 above.
 
-### Project Summary
-The following is a summary description of the project instructions
+[Learn more here.](https://github.com/jtleek/datasharing)
 
-You should create one R script called run_analysis.R that does the following. 
-1. Merges the training and the test sets to create one data set.
-2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-3. Uses descriptive activity names to name the activities in the data set
-4. Appropriately labels the data set with descriptive activity names. 
-5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+## Repository contents
 
-### Additional Information
-You can find additional information about the variables, data and transformations in the CodeBook.MD file.
+This repository does not contain the raw data or the tidy dataset. It
+is a best practice to
+[ignore files](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring)
+that are automatically generated, rather than include them in version
+control. The raw data is available from the same link referred to by
+the [assignment](./ASSIGNMENT.md):
+
+<https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
+
+The tidy dataset can accessed in R by running:
+
+```R
+source("run_analysis.R")
+tidy_dataset <- create_tidy_dataset()
+```
+
+To write the tidy dataset directly to a local file `tidy.csv`, one can run:
+
+```sh
+Rscript run_analysis.R
+```
+
+The code book is available [here](./CODEBOOK.md).
+
+The [run_analysis.R](./run_analysis.R) script is the recipe for both
+obtaining the raw data from its source and cleaning that raw data to
+produce the requested tidy dataset.
+
+## The `run_analysis.R` script
+
+This script defines three functions:
+
+* `load_x()` - Loads the train or test dataset as a
+  [tibble](https://tibble.tidyverse.org/)
+* `load_y()` - Loads the train or test labels and subjects as a tibble.
+* `create_tidy_dataset()` - Downloads and decompresses the raw data if not
+  already downloaded, completes the assigned steps, and returns the tidy
+  dataset as a tibble.
+
+The `tidy.csv` file is only generated automatically when executed as a script.
+No file is generated when the script is used via `source()`.
