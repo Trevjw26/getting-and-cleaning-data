@@ -1,62 +1,18 @@
-# getting-and-cleaning-data
-
+# Getting and Cleaning Data - Course Project
 Trevor Williams
 
-This repository contains the source code and documentation to complete the
-course project for the Coursera class, *Getting and Cleaning Data*.
+This is the course project for the Getting and Cleaning Data Coursera course.
+The R script, `run_analysis.R`, does the following:
 
-## Expectations when sharing data
+1. Download the dataset if it does not already exist in the working directory
+2. Load the activity and feature info
+3. Loads both the training and test datasets, keeping only those columns which
+   reflect a mean or standard deviation
+4. Loads the activity and subject data for each dataset, and merges those
+   columns with the dataset
+5. Merges the two datasets
+6. Converts the `activity` and `subject` columns into factors
+7. Creates a tidy dataset that consists of the average (mean) value of each
+   variable for each subject and activity pair.
 
-To facilitate efficient and timely analysis, one should pass along to a
-statistician the following:
-
-1. The raw data.
-2. A tidy dataset.
-3. A code book describing each variable and its values in the tidy dataset.
-4. A recipe for going from 1 above to 2 and 3 above.
-
-[Learn more here.](https://github.com/jtleek/datasharing)
-
-## Repository contents
-
-This repository does not contain the raw data or the tidy dataset. It
-is a best practice to
-[ignore files](https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring)
-that are automatically generated, rather than include them in version
-control. The raw data is available from the same link referred to by
-the [assignment](./ASSIGNMENT.md):
-
-<https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
-
-The tidy dataset can accessed in R by running:
-
-```R
-source("run_analysis.R")
-tidy_dataset <- create_tidy_dataset()
-```
-
-To write the tidy dataset directly to a local file `tidy.csv`, one can run:
-
-```sh
-Rscript run_analysis.R
-```
-
-The code book is available [here](./CODEBOOK.md).
-
-The [run_analysis.R](./run_analysis.R) script is the recipe for both
-obtaining the raw data from its source and cleaning that raw data to
-produce the requested tidy dataset.
-
-## The `run_analysis.R` script
-
-This script defines three functions:
-
-* `load_x()` - Loads the train or test dataset as a
-  [tibble](https://tibble.tidyverse.org/)
-* `load_y()` - Loads the train or test labels and subjects as a tibble.
-* `create_tidy_dataset()` - Downloads and decompresses the raw data if not
-  already downloaded, completes the assigned steps, and returns the tidy
-  dataset as a tibble.
-
-The `tidy.csv` file is only generated automatically when executed as a script.
-No file is generated when the script is used via `source()`.
+The end result is shown in the file `tidy.txt`.
